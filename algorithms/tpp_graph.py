@@ -18,7 +18,7 @@ class TemporalEdge:
         self.dep = dep
         self.arr = dep + dur
         self.vid = vid
-        print("self.id=",id," self.u=",u," self.v=",v," self.dep=",dep," self.arr=",dep+dur," self.vid=",vid)
+        # print("self.id=",id," self.u=",u," self.v=",v," self.dep=",dep," self.arr=",dep+dur," self.vid=",vid)
 
 
 class TPPGraph:

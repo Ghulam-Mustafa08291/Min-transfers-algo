@@ -29,7 +29,7 @@ def sq_min_transfers(tpp: TPPGraph, source: int):
                 node_min[y] = new_h
                 min_hops[tpp.nodes[y].v] = min(min_hops[tpp.nodes[y].v], new_h)
                 if not in_q[y]:
-                    print("y is:",y)
+                    # print("y is:",y)
                     q.append(y)
                     in_q[y] = True
     return dict(min_hops)
@@ -100,6 +100,8 @@ def mq_min_transfers(tpp: TPPGraph, source: int):
                         level_qs[lvl_y].append(y)
                         in_q[y] = True
     return dict(min_hops)
+
+
 
 
 

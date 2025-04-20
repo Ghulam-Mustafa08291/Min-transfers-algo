@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+% \usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+% \documentclass{article}
+\usepackage{graphicx}
+
+% Set page margins
+\usepackage[margin=1in]{geometry}
+
+% Set up headers
+\pagestyle{fancy}
+\fancyhead[L]{Min-Transfers Project}
+\fancyhead[C]{Progress Report}
+\fancyhead[R]{Week 15}
+
+\title{Progress Report: Min-Transfers Algorithm Implementation}
+\author{Ghulam Mustafa and syeda Wania hussain}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+
+\section{Implementation Summary}
+In this project, we implemented the 3 out of the 5 algorithms given in the paper, and they were running on Temporal Paths Preservation (TPP) graph model. The objective of the algorithms is to minimize the number of vehicle transfers when traveling across a public transportation network, using a temporal graph representation.
+
+
+\begin{itemize}
+    \item First the  The TpP graph is constructed by converting the temporal transportation data into a directed acyclic graph (DAG), where each edge represents a trip between two stations.
+    \item Then We implemented three variants of the algorithm: SQ (Single Queue), NQ (No Queue), and MQ (Multiple Queues). These algorithms calculate the minimum number of transfers required to reach the destination station.
+    \item  We used randomly generated datasets for testing.At first we intended to follow the approach of the authors of the research paper,where they got real world data and then performed some filtering on it to get the relevent data to be used to construct the TPP graph,but we had issues understanding the data,and due to the time constraint,we decided to go with the approach of randomly generating the data.
+\end{itemize}
+
+
+
+\section{Correctness Testing}
+The correctness of the implementation was tested using both small and large datasets. We verified the results by comparing them with expected outputs, ensuring that the algorithm produces the correct number of transfers for various source and destination stations.
+
+We used the following test cases:
+\begin{itemize}
+    \item Small Sample Dataset: A dataset with 5 trips was used to verify basic functionality and edge cases.
+    \item Medium and Large Datasets: Datasets with 50 and 500 trips were used to evaluate the algorithm's performance and correctness on larger inputs.
+\end{itemize}
+
+
+
+
+\begin{itemize}
+    \item For the small sample, the timing results for all three algorithms were nearly identical, as expected. The dataset was small enough that the overhead of managing queues was negligible, leading to almost no difference in performance. The times were in milliseconds
+    
+    \includegraphics[width=0.5\linewidth]{small_data.png}
+    
+   
+
+    \item For the medium sample, NQ outperformed both SQ and MQ, taking the least amount of time (around 0.04ms). SQ and MQ were similar in performance, with MQ taking slightly more time due to the added complexity of managing multiple queues. These results align with the theoretical expectations, where NQ is expected to be faster than SQ and MQ due to the simpler queueing mechanism. The timing differences between the algorithms remained small due to the relatively small size of the dataset.
+
+     \includegraphics[width=0.5\linewidth]{Medi.png}
+
+\item The large sample (500 trips) exhibited more noticeable differences in runtime. NQ continued to perform the best, taking only 0.23ms. SQ took the longest (0.91ms), followed by MQ (0.64ms). While MQ was slightly faster than SQ, the additional overhead of managing multiple queues in MQ was evident when compared to the simplicity of NQ. These results confirm that for larger datasets, NQ provides the most efficient solution, while SQ remains the least efficient, particularly as the number of trips increases.
+
+\includegraphics[width=0.5\linewidth]{large_dataset.png}
+\end{itemize}
+
+
+
+
+
+
+\section{Complexity \& Runtime Analysis}
+The theoretical complexity of the algorithms is:
+\begin{itemize}
+    \item SQ (Single Queue): The time complexity is \(O(n \cdot \Delta)\), where \(n\) is the number of stations and \(\Delta\) is the average number of outgoing edges per station.
+    \item NQ (No Queue): The time complexity is \(O(n + m)\), where \(n\) is the number of stations and \(m\) is the number of edges (trips).
+    \item MQ (Multiple Queues): The time complexity is \(O(r + L)\), where \(r\) is the number of levels and \(L\) is the number of trips.
+\end{itemize}
+
+The runtime of the algorithms was empirically tested on small, medium, and large datasets. The results showed that the algorithms run efficiently on datasets with up to 500 trips, with times ranging from a few milliseconds to around 1 second on large datasets.
+
+
+
+\section{Challenges \& Solutions}
+
+The challenge we faced  was the acquiring of the dataset that the authors have used in the paper.We singed up on the website from where they got the raw data,but we were unable to figuer out how to get it into the required format so that we can further proceed by constructing a TPP graph from it and then running our implemented algorithms.To counter this.for now we generated sample data to atleast get something to run our algorithms on.
+
+
+
+
+\section{Enhancements}
+In the future, we plan to:
+\begin{itemize}
+    \item we will try to implement this on the real world GTFS dataset that you have used.if we are unable to get that dataset within time,then we will try to run these algorithm on even larger datasets,so that we can mimick the size of the datasets that were used in the paper and get a comparision.
+
+    \item We implemented 3 versions of this algorithm out of the 5 given in the paper,since our instructor said that we should implement atleast 3 of them.However,we will try our best to implement the remaining 2 algorithms aswell.
+\end{itemize}
+
+\end{document}

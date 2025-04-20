@@ -14,14 +14,14 @@ def time_algo(name, fn, tpp, source):
 def run():
     # i ran this commented out code for first time to geenrate data,then commented it out since i got data so no need to run again
     # small_sample = generate_sample_trips(5)
-    medium_sample = generate_sample_trips(50)
-    large_sample = generate_sample_trips(500)
+    # medium_sample = generate_sample_trips(50)
+    # large_sample = generate_sample_trips(500)
     
     
 
-    # save_to_csv(small_sample, 'data/small_sample.csv')
-    save_to_csv(medium_sample, 'data/medium_sample.csv')
-    save_to_csv(large_sample, 'data/large_sample.csv')
+    # # save_to_csv(small_sample, 'data/small_sample.csv')
+    # save_to_csv(medium_sample, 'data/medium_sample.csv')
+    # save_to_csv(large_sample, 'data/large_sample.csv')
 
     # Load the datasets for testing
     small_trips = load_from_csv('data/small_sample.csv')
@@ -37,7 +37,14 @@ def run():
     tpp_medium=TPPGraph(medium_trips)
     tpp_large=TPPGraph(large_trips)
     
-    for src in [1, 2]:
+    for src in [1, 2,4]:
+        
+        print(f"\n===== Source = {src} on Small Sample =====")
+        tpp = tpp_small  # your 5‑trip graph
+        time_algo("SQ", sq_min_transfers, tpp, src)
+        time_algo("NQ", nq_min_transfers, tpp, src)
+        time_algo("MQ", mq_min_transfers, tpp, src)
+        
         print(f"\n===== Source = {src} on Medium Sample =====")
         tpp = tpp_medium  # your 50‑trip graph
         time_algo("SQ", sq_min_transfers, tpp, src)
