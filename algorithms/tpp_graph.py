@@ -18,6 +18,7 @@ class TemporalEdge:
         self.dep = dep
         self.arr = dep + dur
         self.vid = vid
+        print("self.id=",id," self.u=",u," self.v=",v," self.dep=",dep," self.arr=",dep+dur," self.vid=",vid)
 
 
 class TPPGraph:
@@ -37,35 +38,32 @@ class TPPGraph:
         self.level = [0]*self.n
         self._build()
 
+
     def _build(self):
         # Group trips by their start station for adjacency construction
         start_map = defaultdict(list)
         for node in self.nodes:
             start_map[node.u].append(node.id)
-        # Sort outgoing lists by departure time descending
+
+        # Sort outgoing lists by departure time (in decreasing order)
         for u, lst in start_map.items():
             lst.sort(key=lambda i: self.nodes[i].dep, reverse=True)
             start_map[u] = lst
-        # Build adjacency: for each trip, link to all valid next trips
+
+        # Build adjacency list: for each trip, link to all valid next trips
         for x in self.nodes:
+            # look at all trips that depart from x.v, in descending dep time
             for j in start_map[x.v]:
                 y = self.nodes[j]
-                if y.dep >= x.arr:
-                    w = 0 if x.vid == y.vid else 1
-                    self.adj[x.id].append((y.id, w))
-                else:
+
+                # **Temporal validity**: only if y.dep >= x.arr
+                if y.dep < x.arr:
+                    # since list is sorted descending by dep, we can break here
                     break
-        # Compute levels via topological sort (DAG)
-        indeg = [0]*self.n
-        for u in range(self.n):
-            for v,_ in self.adj[u]:
-                indeg[v] += 1
-        q = deque([i for i in range(self.n) if indeg[i]==0])
-        while q:
-            u = q.popleft()
-            for v,_ in self.adj[u]:
-                self.level[v] = max(self.level[v], self.level[u] + 1)
-                indeg[v] -= 1
-                if indeg[v] == 0:
-                    q.append(v)
-        print("in TPP graph class,final djacency List:", self.adj)  
+
+                # weight = 0 if same vehicle, else 1
+                w = 0 if x.vid == y.vid else 1
+
+                # avoid duplicate edges
+                if (y.id, w) not in self.adj[x.id]:
+                    self.adj[x.id].append((y.id, w))
