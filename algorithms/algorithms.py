@@ -122,7 +122,11 @@ def mq_min_transfers(tpp: TPPGraph, source: int):
 
 
 
+def pq_min_transfers(tpp: TPPGraph, source: int):
+    print("will try to implement this")
 
+def mpq_min_transfers(tpp: TPPGraph, source:	int):
+   print("will try to implement this")
 
 
 
