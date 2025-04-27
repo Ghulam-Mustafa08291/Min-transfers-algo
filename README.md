@@ -22,7 +22,7 @@ This project aims to write fully fucntioning codes of atleast 3 of the 5 suggest
 - Implement multiple algorithms (Single Queue, No Queue, etc.) from the paper.
 - Compare their speed and accuracy on real transportation data(if possible)
 
-## CHECKPOINT 3 update
+## CHECKPOINT 4 update
 To generate the random datasets,run the following command
 python generate_data.py
 
