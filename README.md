@@ -22,3 +22,20 @@ This project aims to write fully fucntioning codes of atleast 3 of the 5 suggest
 - Implement multiple algorithms (Single Queue, No Queue, etc.) from the paper.
 - Compare their speed and accuracy on real transportation data(if possible)
 
+## CHECKPOINT 3 update
+To generate the random datasets,run the following command
+python generate_data.py
+
+To run the Min-Transfers Algorithm on the generated datasets and compare the performance of the SQ, NQ, and MQ algorithms, run the following command:
+
+python main.py
+
+This will:
+
+->Load the generated datasets (small, medium, and large samples).
+
+->Run each algorithm (SQ, NQ, MQ) on each dataset.
+
+->Output the minimum number of transfers and timing results for each source and dataset.
+
+NOTE:The data folder has all the datasets,algortihms folder has all the algorithms that we wrote for this project
